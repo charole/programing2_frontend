@@ -4,4 +4,5 @@
 
 .container {
 	padding-top: 64px;
+	min-height: 100vh;
 }
