@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 
-import PyScript from '../PyScript';
-
 export default function Header() {
   return (
     <header className='w-full absolute top-0 h-16 bg-gray-200 flex justify-between items-center p-5'>
@@ -12,7 +10,6 @@ export default function Header() {
         <Link to='/signup'>회원가입</Link>
         <Link to='/login'>로그인</Link>
       </div>
-      <PyScript src='/src/pyscript/index.py' />
     </header>
   );
 }

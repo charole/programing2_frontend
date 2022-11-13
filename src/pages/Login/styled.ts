@@ -12,6 +12,7 @@ export const Container = styled.div`
     width: 100%;
     font-size: 11px;
     color: #8e8e8e;
+    margin-top: 5px;
   }
 `;
 
