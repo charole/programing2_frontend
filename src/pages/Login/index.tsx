@@ -1,11 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+import { useSetAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
-import PyScript from '../../components/PyScript';
+// import PyScript from '../../components/PyScript';
+import { emailAtom } from '../../store/atoms/user';
 
 import Card from './components/Card';
 import { Container, Image, LoginButton } from './styled';
@@ -13,14 +15,16 @@ import { LoginFormTypes } from './types';
 
 export default function Login() {
   const navigate = useNavigate();
+  const setEmail = useSetAtom(emailAtom);
   const { register, getValues } = useForm<LoginFormTypes>();
 
-  const loginTest = async () => {
+  const onLogin = async () => {
     const { status } = await axios.post('http://localhost:8000/login/', {
       email: getValues('email'),
       password: getValues('password'),
     });
     if (status === 200) {
+      setEmail(getValues('email'));
       navigate('/');
     }
   };
@@ -38,6 +42,7 @@ export default function Login() {
           required
           fullWidth
           size='small'
+          style={{ marginBottom: '15px' }}
         />
         <TextField
           {...register('password')}
@@ -49,12 +54,12 @@ export default function Login() {
           fullWidth
           size='small'
         />
-        <LoginButton onClick={loginTest}>로그인</LoginButton>
+        <LoginButton onClick={onLogin}>로그인</LoginButton>
         <div className='signup-wrapper'>
           <Link to='/signup'>회원가입</Link>
         </div>
       </Card>
-      <PyScript src='/src/pyscript/index.py' />
+      {/* <PyScript src='/src/pyscript/index.py' /> */}
     </Container>
   );
 }

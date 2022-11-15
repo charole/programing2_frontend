@@ -4,6 +4,13 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   height: 70px;
+  padding-left: 15px;
+  padding-right: 15px;
+`;
+
+export const LogoImage = styled.img`
+  width: 52px;
+  height: 52px;
 `;
 
 export const LogoWrapper = styled.div`
