@@ -5,6 +5,10 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #EEEEF2;
+  max-width: 100%;
+  width: 100%;
+  position: absolute;
 
   & .signup-wrapper {
     display: flex;

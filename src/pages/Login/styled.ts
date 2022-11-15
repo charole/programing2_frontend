@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  height: calc(100vh - 70px);
+  height: calc(100vh - 64px);
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #EEEEF2;
+  max-width: 100%;
+  width: 100%;
+  position: absolute;
 
   & .signup-wrapper {
     display: flex;
     justify-content: flex-end;
-    width: 100%;
     font-size: 11px;
     color: #8e8e8e;
     margin-top: 5px;
