@@ -57,7 +57,7 @@ export default function Header() {
           </NavLink>
         </div>
       ) : (
-        <div className='space-x-2 text-blue-500 font-sans font-medium p-3'>
+        <div className='space-x-2 text-blue-500 font-sans font-medium p-3 px-0'>
           <NavLink to='/signup' className='bg-blue-500 text-white p-2 rounded-sm'>
             회원가입
           </NavLink>
