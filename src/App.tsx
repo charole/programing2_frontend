@@ -7,7 +7,7 @@ import Signup from './pages/Signup';
 
 function App() {
   return (
-    <div className='container'>
+    <div className='container max-w-full'>
       <Header />
       <Routes>
         <Route path='/login' element={<Login />} />
