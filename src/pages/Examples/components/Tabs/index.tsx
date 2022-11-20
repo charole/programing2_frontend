@@ -2,7 +2,9 @@ import { ReactNode, useState } from 'react';
 
 import styled from 'styled-components';
 
-import { Box, Tab, Tabs, Typography } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
+
+import { ExampleResponse } from '../../types';
 
 import { TabContainer } from './styled';
 
@@ -10,6 +12,10 @@ interface TabPanelProps {
   children?: ReactNode;
   index: number;
   value: number;
+}
+
+interface ExampleTabsProps {
+  example?: ExampleResponse;
 }
 
 export const StyledTabs = styled(Tabs)`
@@ -33,11 +39,7 @@ function TabPanel({ children, index, value, ...other }: TabPanelProps) {
       aria-labelledby={`tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
     </div>
   );
 }
@@ -49,7 +51,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function ExampleTabs() {
+export default function ExampleTabs({ example }: ExampleTabsProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -74,7 +76,14 @@ export default function ExampleTabs() {
       </Box>
       <TabContainer>
         <TabPanel value={value} index={0}>
-          Item One
+          <div className='text-lg font-bold mb-3'>
+            제목: <br />
+            {example?.title}
+          </div>
+          <div className='text-sm'>
+            내용: <br />
+            {example?.content}
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Item Two
