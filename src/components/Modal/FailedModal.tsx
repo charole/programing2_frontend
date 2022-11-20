@@ -3,7 +3,7 @@ import { useAtom } from 'jotai';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box, Modal } from '@mui/material';
 
-import { failedModalAtom } from '../../store/atoms/modal';
+import { failedModalAtom, failedModalTextAtom } from '../../store/atoms/modal';
 
 const style = {
   position: 'absolute' as const,
@@ -19,6 +19,7 @@ const style = {
 
 export default function FailedModal() {
   const [open, setOpen] = useAtom(failedModalAtom);
+  const [text] = useAtom(failedModalTextAtom);
 
   const handleClose = () => {
     setOpen(false);
@@ -35,7 +36,7 @@ export default function FailedModal() {
         <Box sx={style}>
           <p className='flex justify-center items-center gap-2'>
             <CancelIcon style={{ width: 32, height: 32, color: 'red' }} />
-            땡! 다시 풀어보세요!
+            {text}
           </p>
         </Box>
       </Modal>

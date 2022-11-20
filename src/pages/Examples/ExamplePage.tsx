@@ -5,7 +5,12 @@ import { useSetAtom } from 'jotai';
 
 import PyRepl from '../../components/PyRepl';
 import { axios } from '../../service';
-import { failedModalAtom, successModalAtom } from '../../store/atoms/modal';
+import {
+  failedModalAtom,
+  failedModalTextAtom,
+  successModalAtom,
+  successModalTextAtom,
+} from '../../store/atoms/modal';
 
 import ExampleTabs from './components/Tabs';
 import { Container, ExampleWrapper, PyReplOutputWrapper } from './styled';
@@ -15,6 +20,8 @@ export default function ExamplePage() {
   const [example, setExample] = useState<ExampleResponse>({ id: 0 });
   const setSuccessOpen = useSetAtom(successModalAtom);
   const setFailedOpen = useSetAtom(failedModalAtom);
+  const setSuccessModalTextAtom = useSetAtom(successModalTextAtom);
+  const setFailedModalTextAtom = useSetAtom(failedModalTextAtom);
 
   const { id } = useParams();
 
@@ -29,9 +36,10 @@ export default function ExamplePage() {
       const result = document.getElementById('pyscript-output')?.innerText?.trim();
 
       if (result === example?.answer?.trim()) {
-        console.info('test');
+        setSuccessModalTextAtom('축하해요! 정답을 맞추셨어요!');
         setSuccessOpen(true);
       } else {
+        setFailedModalTextAtom('땡! 다시 풀어보세요!');
         setFailedOpen(true);
       }
     }, 300);

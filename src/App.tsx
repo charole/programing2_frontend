@@ -1,4 +1,7 @@
-import { Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
+
+import { useAtom } from 'jotai';
 
 import Header from './components/Header';
 import FailedModal from './components/Modal/FailedModal';
@@ -9,8 +12,16 @@ import ExamplePage from './pages/Examples/ExamplePage';
 import LoginPage from './pages/Login';
 import RankPage from './pages/Rank';
 import SignupPage from './pages/Signup';
+import { emailAtom } from './store/atoms/user';
 
 function App() {
+  const [email] = useAtom(emailAtom);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (email === '') navigate('/login');
+  }, [navigate]);
+
   return (
     <div className='container max-w-full'>
       <Header />

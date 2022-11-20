@@ -29,7 +29,7 @@ export default function SignupPage() {
       name: getValues('name'),
       age: getValues('age'),
     });
-    if (status === 201) {
+    if (status === 200) {
       setEmail(email);
       setName(name);
       setAge(age);

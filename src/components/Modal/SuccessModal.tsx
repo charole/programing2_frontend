@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Modal } from '@mui/material';
 
-import { successModalAtom } from '../../store/atoms/modal';
+import { successModalAtom, successModalTextAtom } from '../../store/atoms/modal';
 
 const style = {
   position: 'absolute' as const,
@@ -21,6 +21,7 @@ const style = {
 
 export default function SuccessModal() {
   const [open, setOpen] = useAtom(successModalAtom);
+  const [text] = useAtom(successModalTextAtom);
   const navigation = useNavigate();
 
   const handleClose = () => {
@@ -39,7 +40,7 @@ export default function SuccessModal() {
         <Box sx={style}>
           <p className='flex justify-center items-center gap-2'>
             <CheckCircleIcon style={{ width: 32, height: 32, color: '#1acf44' }} />
-            축하해요! 정답을 맞추셨어요!
+            {text}
           </p>
         </Box>
       </Modal>

@@ -53,6 +53,7 @@ export default function LoginPage() {
           required
           fullWidth
           size='small'
+          onKeyDown={(e) => e.key === 'Enter' && onLogin()}
         />
         <LoginButton onClick={onLogin}>로그인</LoginButton>
         <div className='signup-wrapper'>
