@@ -15,7 +15,7 @@ export default function CalendarField({ rootStyle }: CalendarFieldProps) {
   const { date, setDate } = useDate(null);
 
   return (
-    <Container style={{ ...rootStyle }}>
+    <Container style={{ ...rootStyle }} className='bg-slate-700'>
       <Head style={{ marginBottom: 10 }}>
         <span>Day {dayjs(date).date() || dayjs().date()}</span>
         <span>
@@ -25,7 +25,7 @@ export default function CalendarField({ rootStyle }: CalendarFieldProps) {
         </span>
       </Head>
       <Calendar state={date} setState={setDate} />
-      <Bottom>
+      <Bottom className='bg-slate-500'>
         <h2 style={{ marginBottom: 10, fontWeight: 'bold' }}>Today Clear</h2>
         <BottomClearExam>
           <div>

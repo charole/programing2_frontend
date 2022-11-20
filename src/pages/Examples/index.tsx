@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-import { Button } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 
 import { useInput } from '../../common/hooks/useInput';
@@ -84,9 +83,9 @@ export default function Examples() {
           useSearchIcon
           style={{ width: '400px' }}
         />
-        <Button variant='contained' style={{ height: 56, width: 100 }}>
+        {/* <Button variant='contained' style={{ height: 56, width: 100 }} className='bg-slate-500'>
           검색
-        </Button>
+        </Button> */}
       </FieldForm>
 
       <ContentWrapper style={{ gap: '10px' }}>

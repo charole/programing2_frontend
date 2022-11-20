@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  background: #1976d2;
   padding: 1rem;
   border-radius: 10px;
 `;
@@ -23,7 +22,6 @@ export const Bottom = styled.div`
   width: 100%;
   border-radius: 10px;
   margin-top: 10px;
-  background: #398ada;
 `;
 
 export const BottomClearExam = styled.div`
