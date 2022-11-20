@@ -13,7 +13,7 @@ export default function Header() {
   };
 
   return (
-    <Container className='w-full absolute top-0 bg-white flex justify-between items-center drop-shadow-md'>
+    <Container className='w-full top-0 bg-white flex justify-between items-center drop-shadow-md fixed z-50'>
       <LogoWrapper>
         <NavLink to='/'>
           <LogoImage src='/src/assets/logo.png' alt='로고 이미지' className='mx-2' />
