@@ -46,6 +46,15 @@ export default function Header() {
                 문제 등록
               </StyledNavLink>
             </li>
+            <li>
+              <StyledNavLink
+                to='/my'
+                end
+                className={({ isActive }) => (isActive ? 'active' : undefined)}
+              >
+                마이 페이지
+              </StyledNavLink>
+            </li>
           </ul>
         </StyledNav>
       </LogoWrapper>

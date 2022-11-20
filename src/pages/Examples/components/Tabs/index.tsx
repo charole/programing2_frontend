@@ -16,6 +16,8 @@ interface TabPanelProps {
 
 interface ExampleTabsProps {
   example?: ExampleResponse;
+  useHint?: boolean;
+  getHintHandler?: () => void;
 }
 
 export const StyledTabs = styled(Tabs)`
@@ -51,7 +53,7 @@ function a11yProps(index: number) {
   };
 }
 
-export default function ExampleTabs({ example }: ExampleTabsProps) {
+export default function ExampleTabs({ example, useHint, getHintHandler }: ExampleTabsProps) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -80,13 +82,36 @@ export default function ExampleTabs({ example }: ExampleTabsProps) {
             제목: <br />
             {example?.title}
           </div>
-          <div className='text-sm'>
+          <div className='text-sm mb-3'>
             내용: <br />
             {example?.content}
           </div>
+          {example?.example && (
+            <div className='text-sm rounded bg-slate-100 p-2'>
+              예제: <br />
+              {example.example}
+            </div>
+          )}
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          {useHint ? (
+            <button
+              type='button'
+              className='bg-slate-400 p-2 px-4 rounded-md text-white w-full'
+              onClick={getHintHandler}
+              disabled
+            >
+              이미 보았어요!
+            </button>
+          ) : (
+            <button
+              type='button'
+              className='bg-slate-700 p-2 px-4 rounded-md text-white w-full'
+              onClick={getHintHandler}
+            >
+              힌트 보기
+            </button>
+          )}
         </TabPanel>
         <TabPanel value={value} index={2}>
           Item Three

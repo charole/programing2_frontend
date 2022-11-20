@@ -19,6 +19,7 @@ export default function ExamplesAddPage() {
   const { state: content, changeHandler: contentHandler } = useInput('');
   const { state: answer, changeHandler: answerHandler } = useInput('');
   const { state: example, changeHandler: exampleHandler } = useInput('');
+  const { state: hint, changeHandler: hintHandler } = useInput('');
   const { state: level, changeHandler: levelHandler } = useSelect(1);
   const { state: point, changeHandler: pointHandler } = useSelect(1);
   const setSuccessModalAtom = useSetAtom(successModalAtom);
@@ -43,6 +44,7 @@ export default function ExamplesAddPage() {
       content,
       answer,
       example,
+      hint,
       level,
       point,
     });
@@ -94,6 +96,19 @@ export default function ExamplesAddPage() {
           value={example}
           onChange={exampleHandler}
           fullWidth
+          multiline
+          rows={4}
+        />
+      </div>
+      <div className='w-full'>
+        <TextFieldComponent
+          id='hint'
+          label='힌트'
+          value={hint}
+          onChange={hintHandler}
+          fullWidth
+          multiline
+          rows={4}
         />
       </div>
       <div className='w-full mb-5'>

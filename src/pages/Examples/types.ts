@@ -6,6 +6,7 @@ export interface ExampleResponse {
   answer?: string;
   example?: string;
   example_question?: string;
+  hint?: string;
   level?: number;
   point?: number;
 }

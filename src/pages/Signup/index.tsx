@@ -28,6 +28,7 @@ export default function SignupPage() {
       password: getValues('password'),
       name: getValues('name'),
       age: getValues('age'),
+      point: 0,
     });
     if (status === 200) {
       setEmail(email);
