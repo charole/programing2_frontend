@@ -16,7 +16,7 @@ export default function Header() {
     <Container className='w-full absolute top-0 bg-white flex justify-between items-center drop-shadow-md'>
       <LogoWrapper>
         <NavLink to='/'>
-          <LogoImage src='/src/assets/슝슝이.png' alt='로고 이미지' className='mx-2' />
+          <LogoImage src='/src/assets/logo.png' alt='로고 이미지' className='mx-2' />
         </NavLink>
         <StyledNav>
           <ul>
