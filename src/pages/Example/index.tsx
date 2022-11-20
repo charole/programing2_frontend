@@ -81,7 +81,7 @@ export default function Example() {
           rootHeight={800}
           rootStyle={{ flex: 2 }}
         />
-        <CalendarField rootStyle={{ flex: 1 }} />
+        <CalendarField rootStyle={{ flex: 1, maxWidth: 400 }} />
       </ContentWrapper>
     </Container>
   );
