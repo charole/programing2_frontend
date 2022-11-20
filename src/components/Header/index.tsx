@@ -23,7 +23,6 @@ export default function Header() {
             <li>
               <StyledNavLink
                 to='/example'
-                end
                 className={({ isActive }) => (isActive ? 'active' : undefined)}
               >
                 문제

@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
+
 import { Button } from '@mui/material';
 import { GridColDef } from '@mui/x-data-grid';
 
@@ -9,11 +14,22 @@ import TextField from '../../components/TextField';
 
 import CalendarField from './components/CalendarField';
 import { Container, ContentWrapper, FieldForm } from './styled';
+import { ExampleResponse } from './types';
 
-export default function Example() {
+export default function Examples() {
   const { state: level, changeHandler: levelChangeHandler } = useSelect('');
   const { state: status, changeHandler: statusChangeHandler } = useSelect('');
   const { state: search, changeHandler: searchChangeHandler } = useInput('');
+  const navigate = useNavigate();
+
+  const onTest = async () => {
+    const res = await axios.get('http://localhost:8000/examples/');
+    console.info(res);
+  };
+
+  useEffect(() => {
+    onTest();
+  }, []);
 
   const levelOptions = [
     { value: 1, label: '하' },
@@ -25,10 +41,10 @@ export default function Example() {
     { value: 0, label: '미통과' },
   ];
 
-  const gridData = [
-    { id: 1, name: 'test1', age: 14 },
-    { id: 2, name: 'test2', age: 21 },
-    { id: 3, name: 'test3', age: 33 },
+  const gridData: ExampleResponse[] = [
+    { id: 1, title: 'test1', level: '1' },
+    { id: 2, title: 'test2', level: '1' },
+    { id: 3, title: 'test3', level: '2' },
   ];
   const gridColumn: GridColDef[] = [
     { field: 'id', headerName: '번호', width: 100 },
@@ -80,8 +96,11 @@ export default function Example() {
           rootWidth='100%'
           rootHeight={800}
           rootStyle={{ flex: 2 }}
+          onRowClick={(rowObject) => {
+            if (rowObject?.id) navigate(`/example/${rowObject.id}`);
+          }}
         />
-        <CalendarField rootStyle={{ flex: 1, maxWidth: 400 }} />
+        <CalendarField rootStyle={{ flex: 1, maxWidth: 350 }} />
       </ContentWrapper>
     </Container>
   );
