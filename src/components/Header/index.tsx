@@ -39,7 +39,7 @@ export default function Header() {
             </li>
             <li>
               <StyledNavLink
-                to='/example/add'
+                to='/examples/add'
                 end
                 className={({ isActive }) => (isActive ? 'active' : undefined)}
               >

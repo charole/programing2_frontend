@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import axios from 'axios';
+import { useSetAtom } from 'jotai';
 
 import PyRepl from '../../components/PyRepl';
+import { axios } from '../../service';
+import { failedModalAtom, successModalAtom } from '../../store/atoms/modal';
 
 import ExampleTabs from './components/Tabs';
 import { Container, ExampleWrapper, PyReplOutputWrapper } from './styled';
 import { ExampleResponse } from './types';
 
-export default function Example() {
+export default function ExamplePage() {
   const [example, setExample] = useState<ExampleResponse>({ id: 0 });
+  const setSuccessOpen = useSetAtom(successModalAtom);
+  const setFailedOpen = useSetAtom(failedModalAtom);
+
   const { id } = useParams();
 
   const getData = async () => {
-    const { data } = await axios.get(`http://localhost:8000/example/${id}`);
+    const { data } = await axios.get(`/example/${id}`);
     if (data) setExample(data);
   };
 
@@ -24,7 +29,10 @@ export default function Example() {
       const result = document.getElementById('pyscript-output')?.innerText?.trim();
 
       if (result === example?.answer?.trim()) {
-        console.info('clear');
+        console.info('test');
+        setSuccessOpen(true);
+      } else {
+        setFailedOpen(true);
       }
     }, 300);
   };

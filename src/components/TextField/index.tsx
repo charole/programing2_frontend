@@ -1,7 +1,7 @@
 import { ChangeEventHandler } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { InputAdornment, TextField } from '@mui/material';
+import { InputAdornment, TextField as TextFieldOrigin } from '@mui/material';
 
 interface TextFieldProps {
   value?: string;
@@ -15,7 +15,7 @@ interface TextFieldProps {
   [key: string]: unknown;
 }
 
-export default function TextFieldComponent({
+export default function TextField({
   value,
   onChange,
   id,
@@ -24,7 +24,7 @@ export default function TextFieldComponent({
   ...rest
 }: TextFieldProps) {
   return (
-    <TextField
+    <TextFieldOrigin
       id={id}
       label={label}
       value={value}

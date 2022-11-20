@@ -1,18 +1,18 @@
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
+import { axios } from '../../service';
 import { ageAtom, emailAtom, nameAtom } from '../../store/atoms/user';
 import Card from '../Login/components/Card';
 
 import { Container, Image, LoginButton } from './styled';
 import { SignupFormTypes } from './types';
 
-export default function Signup() {
+export default function SignupPage() {
   const navigate = useNavigate();
   const { register, getValues } = useForm<SignupFormTypes>();
   const setEmail = useSetAtom(emailAtom);
@@ -23,7 +23,7 @@ export default function Signup() {
     const {
       data: { age, email, name },
       status,
-    } = await axios.post('http://localhost:8000/accounts/', {
+    } = await axios.post('/accounts/', {
       email: getValues('email'),
       password: getValues('password'),
       name: getValues('name'),

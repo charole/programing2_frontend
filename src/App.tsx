@@ -1,23 +1,30 @@
 import { Route, Routes } from 'react-router-dom';
 
 import Header from './components/Header';
-import Examples from './pages/Examples';
-import Example from './pages/Examples/Example';
-import Login from './pages/Login';
-import Rank from './pages/Rank';
-import Signup from './pages/Signup';
+import FailedModal from './components/Modal/FailedModal';
+import SuccessModal from './components/Modal/SuccessModal';
+import ExamplesPage from './pages/Examples';
+import ExamplesAddPage from './pages/Examples/ExampleAddPage';
+import ExamplePage from './pages/Examples/ExamplePage';
+import LoginPage from './pages/Login';
+import RankPage from './pages/Rank';
+import SignupPage from './pages/Signup';
 
 function App() {
   return (
     <div className='container max-w-full'>
       <Header />
       <Routes>
-        <Route path='/login' element={<Login />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/example' element={<Examples />} />
-        <Route path='/example/:id' element={<Example />} />
-        <Route path='/rank' element={<Rank />} />
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/signup' element={<SignupPage />} />
+        <Route path='/example' element={<ExamplesPage />} />
+        <Route path='/example/:id' element={<ExamplePage />} />
+        <Route path='/examples/add' element={<ExamplesAddPage />} />
+        <Route path='/rank' element={<RankPage />} />
       </Routes>
+
+      <SuccessModal />
+      <FailedModal />
     </div>
   );
 }

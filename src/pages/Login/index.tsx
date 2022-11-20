@@ -1,11 +1,11 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { useForm } from 'react-hook-form';
 
 import { TextField } from '@mui/material';
 
+import { axios } from '../../service';
 // import PyScript from '../../components/PyScript';
 import { emailAtom } from '../../store/atoms/user';
 
@@ -13,13 +13,13 @@ import Card from './components/Card';
 import { Container, Image, LoginButton } from './styled';
 import { LoginFormTypes } from './types';
 
-export default function Login() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const setEmail = useSetAtom(emailAtom);
   const { register, getValues } = useForm<LoginFormTypes>();
 
   const onLogin = async () => {
-    const { status } = await axios.post('http://localhost:8000/login/', {
+    const { status } = await axios.post('/login/', {
       email: getValues('email'),
       password: getValues('password'),
     });

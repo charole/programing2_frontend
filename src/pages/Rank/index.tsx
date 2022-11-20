@@ -5,7 +5,7 @@ import Grid from '../../components/Grid';
 import CalendarField from './components/CalendarField';
 import { Container, ContentWrapper } from './styled';
 
-export default function Rank() {
+export default function RankPage() {
   const gridData = [
     { id: 1, rank: 'test1', age: 14 },
     { id: 2, rank: 'test2', age: 21 },

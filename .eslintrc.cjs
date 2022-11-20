@@ -49,6 +49,12 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-console': [2, { allow: ['error', 'info'] }],
     'react/require-default-props': 0,
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelAttributes: ['htmlFor'],
+      },
+    ],
   },
   overrides: [
     {

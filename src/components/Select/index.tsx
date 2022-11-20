@@ -1,6 +1,12 @@
 import { ReactNode } from 'react';
 
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from '@mui/material';
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select as SelectOrigin,
+  SelectChangeEvent,
+} from '@mui/material';
 
 type SelectValue = string | number;
 interface SelectProps {
@@ -16,7 +22,7 @@ interface SelectProps {
   [key: string]: unknown;
 }
 
-export default function SelectComponent({
+export default function Select({
   value,
   onChange,
   option,
@@ -29,7 +35,7 @@ export default function SelectComponent({
   return (
     <FormControl fullWidth {...formOption}>
       <InputLabel id={labelId}>{label}</InputLabel>
-      <Select
+      <SelectOrigin
         labelId={labelId}
         id={id}
         label={label}
@@ -42,7 +48,7 @@ export default function SelectComponent({
             {item.label}
           </MenuItem>
         ))}
-      </Select>
+      </SelectOrigin>
     </FormControl>
   );
 }

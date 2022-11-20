@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
-
 import { GridColDef } from '@mui/x-data-grid';
 
 import { useInput } from '../../common/hooks/useInput';
@@ -10,12 +8,13 @@ import { useSelect } from '../../common/hooks/useSelect';
 import Grid from '../../components/Grid';
 import Select from '../../components/Select';
 import TextField from '../../components/TextField';
+import { axios } from '../../service';
 
 import CalendarField from './components/CalendarField';
 import { Container, ContentWrapper, FieldForm } from './styled';
 import { ExampleResponse } from './types';
 
-export default function Examples() {
+export default function ExamplesPage() {
   const { state: level, changeHandler: levelChangeHandler } = useSelect('');
   const { state: status, changeHandler: statusChangeHandler } = useSelect('');
   const { state: search, changeHandler: searchChangeHandler } = useInput('');
@@ -23,7 +22,7 @@ export default function Examples() {
   const navigate = useNavigate();
 
   const getExampleData = async () => {
-    const { data } = await axios.get<ExampleResponse[]>('http://localhost:8000/examples/');
+    const { data } = await axios.get<ExampleResponse[]>('/examples/');
     if (data) setGridData(data);
   };
 
