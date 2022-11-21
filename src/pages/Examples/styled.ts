@@ -32,6 +32,12 @@ export const PyReplOutputWrapper = styled.div`
   padding: 0.5rem;
   font-size: 12px;
   background: #f8f8f8;
-  border: 1px solid #bdbdbd;
   border-top: 0;
+  &.css-1e2bxag-MuiDataGrid-root{
+    border: 1px solid #94D2D7;
+  }
+`;
+
+export const Grid = styled.div`
+  border-bottom: 1px solid #94D2D7;
 `;

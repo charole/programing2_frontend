@@ -25,6 +25,10 @@ export const StyledNav = styled.nav`
     display: flex;
     justify-content: center;
     align-items: center;
+    
+  }
+  li a{
+    color: #94D2D7
   }
 `;
 
@@ -32,7 +36,17 @@ export const StyledNavLink = styled(NavLink)`
   padding: 25px 15px;
   &.active {
     font-weight: bold;
-    color: rgb(59 130 246 / var(--tw-bg-opacity));
-    border-bottom: 2px solid rgb(59 130 246 / var(--tw-bg-opacity));
+    color: #4B9495;
+    border-bottom: 2px solid #4B9495;
+  }
+`;
+
+export const StyledNavBtn = styled(NavLink)`
+  &.btn-sign-in {
+    background-color: #94D2D7;
+  }
+  &.btn-login {
+    border: 1px solid #94D2D7;
+    color: #94D2D7;
   }
 `;

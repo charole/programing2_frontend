@@ -3,6 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   padding: 1rem;
   border-radius: 10px;
+  &.calender{
+    background-color: #94D2D7;
+  }
 `;
 
 export const Head = styled.div`
@@ -22,6 +25,9 @@ export const Bottom = styled.div`
   width: 100%;
   border-radius: 10px;
   margin-top: 10px;
+  &.bottom-clear-exam{
+    background-color: #4B9495;
+  }
 `;
 
 export const BottomClearExam = styled.div`

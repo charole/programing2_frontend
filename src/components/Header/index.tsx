@@ -4,7 +4,7 @@ import { useAtom } from 'jotai';
 
 import { emailAtom } from '../../store/atoms/user';
 
-import { Container, LogoImage, LogoWrapper, StyledNav, StyledNavLink } from './styled';
+import { Container, LogoImage, LogoWrapper, StyledNav, StyledNavLink, StyledNavBtn } from './styled';
 
 export default function Header() {
   const [email, setEmail] = useAtom(emailAtom);
@@ -60,21 +60,21 @@ export default function Header() {
       </LogoWrapper>
       {email ? (
         <div>
-          <NavLink to='/' className='bg-blue-500 text-white p-2 rounded-sm' onClick={onLogout}>
+          <StyledNavBtn to='/' className='bg-red-500 text-white p-2 rounded-sm' onClick={onLogout}>
             로그아웃
-          </NavLink>
+          </StyledNavBtn>
         </div>
       ) : (
         <div className='space-x-2 text-blue-500 font-sans font-medium p-3 px-0'>
-          <NavLink to='/signup' className='bg-blue-500 text-white p-2 rounded-sm'>
+          <StyledNavBtn to='/signup' className='btn-sign-in text-white p-2 rounded-sm'>
             회원가입
-          </NavLink>
-          <NavLink
+          </StyledNavBtn>
+          <StyledNavBtn
             to='/login'
-            className='bg-white border-blue-500 text-blue-500 p-2 rounded-sm border'
+            className='btn-login bg-white p-2 rounded-sm border'
           >
             로그인
-          </NavLink>
+          </StyledNavBtn>
         </div>
       )}
     </Container>
