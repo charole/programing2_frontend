@@ -22,6 +22,9 @@ export const Bottom = styled.div`
   width: 100%;
   border-radius: 10px;
   margin-top: 10px;
+  &.bottom-clear-exam{
+    background-color: #4B9495;
+  }
 `;
 
 export const BottomClearExam = styled.div`

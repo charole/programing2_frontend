@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  padding: 2rem;
+  padding: 1rem;
+  border-radius: 10px;
+  .calender{
+    background-color: #94D2D7;
+  }
 `;
 
 export const FieldForm = styled.div`
