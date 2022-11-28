@@ -20,7 +20,8 @@ export default function ExamplesAddPage() {
   const { state: answer, changeHandler: answerHandler } = useInput('');
   const { state: example, changeHandler: exampleHandler } = useInput('');
   const { state: hint, changeHandler: hintHandler } = useInput('');
-  const { state: level, changeHandler: levelHandler } = useSelect(1);
+  const { state: level, changeHandler: levelHandler } = useSelect('하');
+  const { state: examType, changeHandler: exampleTypeHandler } = useSelect('Simple');
   const { state: point, changeHandler: pointHandler } = useSelect(1);
   const setSuccessModalAtom = useSetAtom(successModalAtom);
   const setFailedModalAtom = useSetAtom(failedModalAtom);
@@ -28,14 +29,18 @@ export default function ExamplesAddPage() {
   const setFailedModalTextAtom = useSetAtom(failedModalTextAtom);
 
   const levelOptions = [
-    { label: '하', value: 1 },
-    { label: '중', value: 2 },
-    { label: '상', value: 3 },
+    { label: '하', value: '하' },
+    { label: '중', value: '중' },
+    { label: '상', value: '상' },
   ];
   const pointOptions = [
     { label: '1점', value: 1 },
     { label: '2점', value: 2 },
     { label: '3점', value: 3 },
+  ];
+  const examTypeOptions = [
+    { label: '객관식', value: 'Simple' },
+    { label: '주관식', value: 'Multiple' },
   ];
 
   const addExampleDataHandler = async () => {
@@ -128,6 +133,16 @@ export default function ExamplesAddPage() {
           value={point}
           onChange={pointHandler}
           option={pointOptions}
+          fullWidth
+        />
+      </div>
+      <div className='w-full'>
+        <SelectComponent
+          id='examType'
+          label='문제 유형'
+          value={examType}
+          onChange={exampleTypeHandler}
+          option={examTypeOptions}
           fullWidth
         />
       </div>
