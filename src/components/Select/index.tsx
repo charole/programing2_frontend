@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 import {
   FormControl,
@@ -22,7 +22,7 @@ interface SelectProps {
   [key: string]: unknown;
 }
 
-export default function Select({
+export default memo(function Select({
   value,
   onChange,
   option,
@@ -51,4 +51,4 @@ export default function Select({
       </SelectOrigin>
     </FormControl>
   );
-}
+});

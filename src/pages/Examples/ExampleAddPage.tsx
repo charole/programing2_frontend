@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { useSetAtom } from 'jotai';
 
 import { useInput } from '../../common/hooks/useInput';
@@ -28,20 +30,29 @@ export default function ExamplesAddPage() {
   const setSuccessModalTextAtom = useSetAtom(successModalTextAtom);
   const setFailedModalTextAtom = useSetAtom(failedModalTextAtom);
 
-  const levelOptions = [
-    { label: '하', value: '하' },
-    { label: '중', value: '중' },
-    { label: '상', value: '상' },
-  ];
-  const pointOptions = [
-    { label: '1점', value: 1 },
-    { label: '2점', value: 2 },
-    { label: '3점', value: 3 },
-  ];
-  const examTypeOptions = [
-    { label: '객관식', value: 'Simple' },
-    { label: '주관식', value: 'Multiple' },
-  ];
+  const levelOptions = useMemo(
+    () => [
+      { label: '하', value: '하' },
+      { label: '중', value: '중' },
+      { label: '상', value: '상' },
+    ],
+    []
+  );
+  const pointOptions = useMemo(
+    () => [
+      { label: '1점', value: 1 },
+      { label: '2점', value: 2 },
+      { label: '3점', value: 3 },
+    ],
+    []
+  );
+  const examTypeOptions = useMemo(
+    () => [
+      { label: '객관식', value: 'Simple' },
+      { label: '주관식', value: 'Multiple' },
+    ],
+    []
+  );
 
   const addExampleDataHandler = async () => {
     const { status } = await axios.post('/examples/', {

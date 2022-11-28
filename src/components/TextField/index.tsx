@@ -1,4 +1,4 @@
-import { ChangeEventHandler } from 'react';
+import { ChangeEventHandler, memo } from 'react';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField as TextFieldOrigin } from '@mui/material';
@@ -15,7 +15,7 @@ interface TextFieldProps {
   [key: string]: unknown;
 }
 
-export default function TextField({
+export default memo(function TextField({
   value,
   onChange,
   id,
@@ -40,4 +40,4 @@ export default function TextField({
       {...rest}
     />
   );
-}
+});

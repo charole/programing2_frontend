@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+
 import { GridColDef } from '@mui/x-data-grid';
 
 import Grid from '../../components/Grid';
+import { axios } from '../../service';
 
 import CalendarField from './components/CalendarField';
 import { Container, ContentWrapper } from './styled';
@@ -18,6 +21,15 @@ export default function RankPage() {
     { field: 'clearCount', headerName: '해결한 문제 수', width: 150, sortable: true },
     { field: 'point', headerName: '보유한 포인트', width: 150, sortable: true },
   ];
+
+  const testFn = async () => {
+    const res = await axios.get('/users/');
+    console.info(res);
+  };
+
+  useEffect(() => {
+    testFn();
+  }, []);
 
   return (
     <Container>
