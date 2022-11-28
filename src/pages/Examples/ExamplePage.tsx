@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import PyRepl from '../../components/PyRepl';
 import { axios } from '../../service';
@@ -23,7 +23,7 @@ import { ExampleResponse } from './types';
 export default function ExamplePage() {
   const [example, setExample] = useState<ExampleResponse>({ id: 0 });
   const [useHint, setUseHint] = useState(false);
-  const [email] = useAtom(emailAtom);
+  const email = useAtomValue(emailAtom);
   const [confirmState, setConfirmState] = useAtom(confirmStateAtom);
   const setSuccessOpen = useSetAtom(successModalAtom);
   const setFailedOpen = useSetAtom(failedModalAtom);

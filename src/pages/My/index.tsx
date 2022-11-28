@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 import TextField from '../../components/TextField';
 import { axios } from '../../service';
@@ -9,7 +9,7 @@ import { emailAtom } from '../../store/atoms/user';
 import { Container } from './styled';
 
 export default function MyPage() {
-  const [email] = useAtom(emailAtom);
+  const email = useAtomValue(emailAtom);
   const [form, setForm] = useState({
     email: '',
     name: '',

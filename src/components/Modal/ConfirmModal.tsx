@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { Box, Modal } from '@mui/material';
 
@@ -18,7 +18,7 @@ const style = {
 
 export default function ConfirmModal() {
   const [open, setOpen] = useAtom(confirmModalAtom);
-  const [text] = useAtom(confirmModalTextAtom);
+  const text = useAtomValue(confirmModalTextAtom);
   const setConfirmState = useSetAtom(confirmStateAtom);
 
   const handleClose = (confirmState = false) => {

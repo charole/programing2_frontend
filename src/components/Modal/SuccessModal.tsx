@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { Box, Modal } from '@mui/material';
@@ -21,7 +21,7 @@ const style = {
 
 export default function SuccessModal() {
   const [open, setOpen] = useAtom(successModalAtom);
-  const [text] = useAtom(successModalTextAtom);
+  const text = useAtomValue(successModalTextAtom);
   const navigation = useNavigate();
 
   const handleClose = () => {

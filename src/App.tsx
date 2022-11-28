@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
-import { useAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
 import Header from './components/Header';
 import ConfirmModal from './components/Modal/ConfirmModal';
@@ -17,7 +17,7 @@ import SignupPage from './pages/Signup';
 import { emailAtom } from './store/atoms/user';
 
 function App() {
-  const [email] = useAtom(emailAtom);
+  const email = useAtomValue(emailAtom);
   const navigate = useNavigate();
 
   useEffect(() => {

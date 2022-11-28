@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box, Modal } from '@mui/material';
@@ -19,7 +19,7 @@ const style = {
 
 export default function FailedModal() {
   const [open, setOpen] = useAtom(failedModalAtom);
-  const [text] = useAtom(failedModalTextAtom);
+  const text = useAtomValue(failedModalTextAtom);
 
   const handleClose = () => {
     setOpen(false);
