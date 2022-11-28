@@ -1,4 +1,4 @@
-import { memo, ReactNode } from 'react';
+import { ChangeEvent, memo, ReactNode } from 'react';
 
 import {
   FormControl,
@@ -11,7 +11,7 @@ import {
 type SelectValue = string | number;
 interface SelectProps {
   value?: SelectValue;
-  onChange?: (e: SelectChangeEvent<string>, child: ReactNode) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   option?: { value: SelectValue; label: string }[];
   id?: string;
   label?: string;
@@ -40,7 +40,7 @@ export default memo(function Select({
         id={id}
         label={label}
         value={value as string}
-        onChange={onChange}
+        onChange={onChange as (e: SelectChangeEvent<unknown>, child: ReactNode) => void}
         {...rest}
       >
         {option?.map((item) => (

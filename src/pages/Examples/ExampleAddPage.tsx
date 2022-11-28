@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 
 import { useSetAtom } from 'jotai';
 
+import { useForm } from '../../common/hooks/useForm';
 import { useInput } from '../../common/hooks/useInput';
 import { useSelect } from '../../common/hooks/useSelect';
 import SelectComponent from '../../components/Select';
@@ -17,14 +18,16 @@ import {
 import { Container } from './styled';
 
 export default function ExamplesAddPage() {
-  const { state: title, changeHandler: titleHandler } = useInput('');
-  const { state: content, changeHandler: contentHandler } = useInput('');
-  const { state: answer, changeHandler: answerHandler } = useInput('');
-  const { state: example, changeHandler: exampleHandler } = useInput('');
-  const { state: hint, changeHandler: hintHandler } = useInput('');
-  const { state: level, changeHandler: levelHandler } = useSelect('하');
-  const { state: examType, changeHandler: exampleTypeHandler } = useSelect('Simple');
-  const { state: point, changeHandler: pointHandler } = useSelect(1);
+  const { state: form, changeHandler } = useForm({
+    title: '',
+    content: '',
+    answer: '',
+    example: '',
+    hint: '',
+    level: '하',
+    examType: 'Simple',
+    point: 1,
+  });
   const setSuccessModalAtom = useSetAtom(successModalAtom);
   const setFailedModalAtom = useSetAtom(failedModalAtom);
   const setSuccessModalTextAtom = useSetAtom(successModalTextAtom);
@@ -56,13 +59,7 @@ export default function ExamplesAddPage() {
 
   const addExampleDataHandler = async () => {
     const { status } = await axios.post('/examples/', {
-      title,
-      content,
-      answer,
-      example,
-      hint,
-      level,
-      point,
+      ...form,
     });
 
     if (status === 200) {
@@ -80,8 +77,8 @@ export default function ExamplesAddPage() {
         <TextFieldComponent
           id='title'
           label='제목'
-          value={title}
-          onChange={titleHandler}
+          value={form.title}
+          onChange={changeHandler}
           fullWidth
         />
       </div>
@@ -89,8 +86,8 @@ export default function ExamplesAddPage() {
         <TextFieldComponent
           id='title'
           label='내용'
-          value={content}
-          onChange={contentHandler}
+          value={form.content}
+          onChange={changeHandler}
           fullWidth
           multiline
           rows={4}
@@ -100,8 +97,8 @@ export default function ExamplesAddPage() {
         <TextFieldComponent
           id='answer'
           label='정답'
-          value={answer}
-          onChange={answerHandler}
+          value={form.answer}
+          onChange={changeHandler}
           fullWidth
         />
       </div>
@@ -109,8 +106,8 @@ export default function ExamplesAddPage() {
         <TextFieldComponent
           id='example'
           label='예시'
-          value={example}
-          onChange={exampleHandler}
+          value={form.example}
+          onChange={changeHandler}
           fullWidth
           multiline
           rows={4}
@@ -120,8 +117,8 @@ export default function ExamplesAddPage() {
         <TextFieldComponent
           id='hint'
           label='힌트'
-          value={hint}
-          onChange={hintHandler}
+          value={form.hint}
+          onChange={changeHandler}
           fullWidth
           multiline
           rows={4}
@@ -131,8 +128,8 @@ export default function ExamplesAddPage() {
         <SelectComponent
           id='level'
           label='난이도'
-          value={level}
-          onChange={levelHandler}
+          value={form.level}
+          onChange={changeHandler}
           option={levelOptions}
           fullWidth
         />
@@ -141,8 +138,8 @@ export default function ExamplesAddPage() {
         <SelectComponent
           id='level'
           label='난이도'
-          value={point}
-          onChange={pointHandler}
+          value={form.point}
+          onChange={changeHandler}
           option={pointOptions}
           fullWidth
         />
@@ -151,8 +148,8 @@ export default function ExamplesAddPage() {
         <SelectComponent
           id='examType'
           label='문제 유형'
-          value={examType}
-          onChange={exampleTypeHandler}
+          value={form.examType}
+          onChange={changeHandler}
           option={examTypeOptions}
           fullWidth
         />
