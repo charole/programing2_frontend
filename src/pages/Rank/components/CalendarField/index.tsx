@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect, useState } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -7,12 +7,35 @@ import Calendar from '../../../../components/Calendar';
 
 import { Bottom, BottomClearExam, Container, Head } from './styled';
 
+import { axios } from '../../../../service';
+import { useAtomValue } from 'jotai';
+import { emailAtom } from '../../../../store/atoms/user';
+
 interface CalendarFieldProps {
   rootStyle?: CSSProperties;
 }
 
 export default function CalendarField({ rootStyle }: CalendarFieldProps) {
   const { date, setDate } = useDate(null);
+
+  const email = useAtomValue(emailAtom);
+  const [form, setForm] = useState({
+    point: 0,
+    clear_example_count: 0,
+  });
+  
+  const findUserData = async () => {
+    const { data } = await axios.post('/find/user/', {
+      email,
+    });
+
+    if (data) setForm(data);
+  };
+
+  useEffect(() => {
+    console.info(date);
+    findUserData();
+  }, [date]);
 
   return (
     <Container style={{ ...rootStyle }} className='calender'>
@@ -30,11 +53,11 @@ export default function CalendarField({ rootStyle }: CalendarFieldProps) {
         <BottomClearExam>
           <div>
             <span>해결한 문제</span>
-            <span>3</span>
+            <span>{form.clear_example_count}</span>
           </div>
           <div>
             <span>휙득한 포인트</span>
-            <span>10</span>
+            <span>{form.point}</span>
           </div>
         </BottomClearExam>
       </Bottom>
