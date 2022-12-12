@@ -25,7 +25,7 @@ export default function LoginPage() {
     });
     if (status === 200) {
       setEmail(getValues('email'));
-      navigate('/');
+      navigate('/example');
     }
   };
 

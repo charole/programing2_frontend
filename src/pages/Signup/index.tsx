@@ -34,7 +34,7 @@ export default function SignupPage() {
       setEmail(email);
       setName(name);
       setAge(age);
-      navigate('/');
+      navigate('/example');
     }
   };
 
