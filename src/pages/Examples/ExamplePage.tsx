@@ -58,6 +58,9 @@ export default function ExamplePage() {
           point: example.point,
         });
       }
+      axios.put('/account/clear_exam', {
+        email
+      })
     } else {
       setFailedModalTextAtom('땡! 다시 풀어보세요!');
       setFailedOpen(true);
@@ -77,6 +80,9 @@ export default function ExamplePage() {
             point: example.point,
           });
         }
+        axios.put('/account/clear_exam', {
+          email
+        })
       } else {
         setFailedModalTextAtom('땡! 다시 풀어보세요!');
         setFailedOpen(true);
