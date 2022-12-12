@@ -16,7 +16,6 @@ import { ExampleResponse } from './types';
 
 export default function ExamplesPage() {
   const { state: level, changeHandler: levelChangeHandler } = useSelect('');
-  const { state: status, changeHandler: statusChangeHandler } = useSelect('');
   const { state: search, changeHandler: searchChangeHandler } = useInput('');
   const [gridData, setGridData] = useState<ExampleResponse[]>([]);
   const navigate = useNavigate();
@@ -30,7 +29,11 @@ export default function ExamplesPage() {
     if (e.key === 'Enter') {
       if (search.length) {
         const { data } = await axios.get<ExampleResponse[]>('/examples/');
-        setGridData(data.filter((item) => item.title?.indexOf(search) !== -1));
+        setGridData(
+          data
+            .filter((item) => (level !== '' ? item.level === level : item))
+            .filter((item) => item.title?.indexOf(search) !== -1)
+        );
       } else {
         getExampleData();
       }
@@ -42,18 +45,14 @@ export default function ExamplesPage() {
   }, []);
 
   const levelOptions = [
-    { value: 1, label: '하' },
-    { value: 2, label: '중' },
-    { value: 3, label: '상' },
-  ];
-  const statusOptions = [
-    { value: 1, label: '통과' },
-    { value: 0, label: '미통과' },
+    { value: '', label: '전체' },
+    { value: '하', label: '하' },
+    { value: '중', label: '중' },
+    { value: '상', label: '상' },
   ];
 
   const gridColumn: GridColDef[] = [
     { field: 'id', headerName: '번호', width: 100 },
-    { field: 'status', headerName: '상태', width: 100 },
     { field: 'title', headerName: '주제', width: 250, align: 'left' },
     { field: 'level', headerName: '난이도', width: 100, sortable: true },
     { field: 'point', headerName: '포인트', width: 100 },
@@ -70,16 +69,6 @@ export default function ExamplesPage() {
           label='난이도'
           option={levelOptions}
           style={{ width: '200px' }}
-          formOption={{ fullWidth: false }}
-        />
-        <Select
-          value={status}
-          onChange={statusChangeHandler}
-          labelId='status-label'
-          id='status'
-          label='상태'
-          option={statusOptions}
-          style={{ width: '120px' }}
           formOption={{ fullWidth: false }}
         />
         <TextField

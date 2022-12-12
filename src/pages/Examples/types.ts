@@ -8,6 +8,6 @@ export interface ExampleResponse {
   exam_question?: string;
   exam_type?: string;
   hint?: string;
-  level?: number;
+  level?: string;
   point?: number;
 }
