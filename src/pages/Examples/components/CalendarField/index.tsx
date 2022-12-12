@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, useEffect } from 'react';
 
 import dayjs from 'dayjs';
 
@@ -13,6 +13,10 @@ interface CalendarFieldProps {
 
 export default function CalendarField({ rootStyle }: CalendarFieldProps) {
   const { date, setDate } = useDate(null);
+
+  useEffect(() => {
+    console.info(date);
+  }, [date]);
 
   return (
     <Container style={{ ...rootStyle }} className='calender'>

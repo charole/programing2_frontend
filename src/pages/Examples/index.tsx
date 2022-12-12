@@ -26,6 +26,17 @@ export default function ExamplesPage() {
     if (data) setGridData(data);
   };
 
+  const searchHandler = async (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      if (search.length) {
+        const { data } = await axios.get<ExampleResponse[]>('/examples/');
+        setGridData(data.filter((item) => item.title?.indexOf(search) !== -1));
+      } else {
+        getExampleData();
+      }
+    }
+  };
+
   useEffect(() => {
     getExampleData();
   }, []);
@@ -76,6 +87,7 @@ export default function ExamplesPage() {
           onChange={searchChangeHandler}
           label='Search Questions'
           useSearchIcon
+          onKeyDown={searchHandler}
           style={{ width: '400px' }}
         />
         {/* <Button variant='contained' style={{ height: 56, width: 100 }} className='bg-slate-500'>

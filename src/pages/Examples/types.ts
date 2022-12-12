@@ -5,7 +5,8 @@ export interface ExampleResponse {
   content?: string;
   answer?: string;
   example?: string;
-  example_question?: string;
+  exam_question?: string;
+  exam_type?: string;
   hint?: string;
   level?: number;
   point?: number;

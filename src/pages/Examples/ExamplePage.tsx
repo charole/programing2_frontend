@@ -17,12 +17,14 @@ import {
 import { emailAtom } from '../../store/atoms/user';
 
 import ExampleTabs from './components/Tabs';
-import { Container, ExampleWrapper, PyReplOutputWrapper } from './styled';
+import { Container, ExampleQuestionWrapper, ExampleWrapper, PyReplOutputWrapper } from './styled';
 import { ExampleResponse } from './types';
 
 export default function ExamplePage() {
   const [example, setExample] = useState<ExampleResponse>({ id: 0 });
   const [useHint, setUseHint] = useState(false);
+  const [select, setSelect] = useState([]);
+  const [selectValue, setSelectValue] = useState('');
   const email = useAtomValue(emailAtom);
   const [confirmState, setConfirmState] = useAtom(confirmStateAtom);
   const setSuccessOpen = useSetAtom(successModalAtom);
@@ -36,9 +38,31 @@ export default function ExamplePage() {
 
   const getData = async () => {
     const { data } = await axios.get(`/example/${id}`);
-    if (data) setExample(data);
+    if (data) {
+      const selectArr = data.exam_question
+        .split(/[\d]번/gi)
+        .map((item: string) => item && item.trim())
+        .filter((item: string) => item !== '');
+      setExample(data);
+      setSelect(selectArr || []);
+    }
   };
 
+  const selectResultHandler = () => {
+    if (selectValue === example?.answer?.trim()) {
+      setSuccessModalTextAtom('축하해요! 정답을 맞추셨어요!');
+      setSuccessOpen(true);
+      if (example?.point) {
+        axios.put('/point/add/', {
+          email,
+          point: example.point,
+        });
+      }
+    } else {
+      setFailedModalTextAtom('땡! 다시 풀어보세요!');
+      setFailedOpen(true);
+    }
+  };
   const resultHandler = () => {
     document?.getElementById('btnRun')?.click();
     setTimeout(() => {
@@ -109,32 +133,63 @@ export default function ExamplePage() {
       <ExampleWrapper style={{ gap: 10 }}>
         <ExampleTabs example={example} useHint={useHint} getHintHandler={getHintHandler} />
         <div style={{ flex: 2, width: '100%' }}>
-          <PyRepl
-            id='repl-example-id'
-            stdOut='pyscript-output'
-            rootStyle={{ width: '100%' }}
-            height={600}
-          />
-          <PyReplOutputWrapper>
-            <div>Result: </div>
-            <div id='pyscript-output' style={{ fontWeight: 'bold' }} />
-          </PyReplOutputWrapper>
-          <div className='w-full flex justify-end items-center mt-2'>
-            <button
-              type='button'
-              onClick={() => document?.getElementById('btnRun')?.click()}
-              className='bg-slate-400 p-2 px-4 rounded-md text-white mr-2'
-            >
-              실행
-            </button>
-            <button
-              type='button'
-              onClick={resultHandler}
-              className='bg-slate-700 p-2 px-4 rounded-md text-white'
-            >
-              제출
-            </button>
-          </div>
+          {example?.exam_type === 'Simple' ? (
+            <>
+              <PyRepl
+                id='repl-example-id'
+                stdOut='pyscript-output'
+                rootStyle={{ width: '100%' }}
+                height={600}
+              />
+              <PyReplOutputWrapper>
+                <div>Result: </div>
+                <div id='pyscript-output' style={{ fontWeight: 'bold' }} />
+              </PyReplOutputWrapper>
+              <div className='w-full flex justify-end items-center mt-2'>
+                <button
+                  type='button'
+                  onClick={() => document?.getElementById('btnRun')?.click()}
+                  className='bg-slate-400 p-2 px-4 rounded-md text-white mr-2'
+                >
+                  실행
+                </button>
+                <button
+                  type='button'
+                  onClick={resultHandler}
+                  className='bg-slate-700 p-2 px-4 rounded-md text-white'
+                >
+                  제출
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                {select?.map((item, index) => {
+                  return (
+                    <ExampleQuestionWrapper>
+                      <input
+                        type='radio'
+                        id={`exam_question_${index + 1}`}
+                        name='exam_question'
+                        onChange={(e) => setSelectValue(e.target.id.replace(/[^0-9]/g, ''))}
+                      />
+                      <label htmlFor={`exam_question_${index + 1}`}>{item}</label>
+                    </ExampleQuestionWrapper>
+                  );
+                })}
+              </div>
+              <div className='w-full flex justify-end items-center mt-2'>
+                <button
+                  type='button'
+                  onClick={selectResultHandler}
+                  className='bg-slate-700 p-2 px-4 rounded-md text-white'
+                >
+                  제출
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </ExampleWrapper>
     </Container>

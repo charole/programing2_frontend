@@ -36,5 +36,14 @@ export const PyReplOutputWrapper = styled.div`
 `;
 
 export const Grid = styled.div`
-  border-bottom: 1px solid #94D2D7;
+  border-bottom: 1px solid #94d2d7;
+`;
+
+export const ExampleQuestionWrapper = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-right: 15px;
+  cursor: pointer;
 `;

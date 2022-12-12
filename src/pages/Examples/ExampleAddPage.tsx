@@ -3,8 +3,6 @@ import { useMemo } from 'react';
 import { useSetAtom } from 'jotai';
 
 import { useForm } from '../../common/hooks/useForm';
-import { useInput } from '../../common/hooks/useInput';
-import { useSelect } from '../../common/hooks/useSelect';
 import SelectComponent from '../../components/Select';
 import TextFieldComponent from '../../components/TextField';
 import { axios } from '../../service';
@@ -23,9 +21,10 @@ export default function ExamplesAddPage() {
     content: '',
     answer: '',
     example: '',
+    exam_question: '',
     hint: '',
     level: '하',
-    examType: 'Simple',
+    exam_type: 'Simple',
     point: 1,
   });
   const setSuccessModalAtom = useSetAtom(successModalAtom);
@@ -51,8 +50,8 @@ export default function ExamplesAddPage() {
   );
   const examTypeOptions = useMemo(
     () => [
-      { label: '객관식', value: 'Simple' },
-      { label: '주관식', value: 'Multiple' },
+      { label: '객관식', value: 'Multiple' },
+      { label: '주관식', value: 'Simple' },
     ],
     []
   );
@@ -76,6 +75,7 @@ export default function ExamplesAddPage() {
       <div className='w-full'>
         <TextFieldComponent
           id='title'
+          name='title'
           label='제목'
           value={form.title}
           onChange={changeHandler}
@@ -84,7 +84,8 @@ export default function ExamplesAddPage() {
       </div>
       <div className='w-full'>
         <TextFieldComponent
-          id='title'
+          id='content'
+          name='content'
           label='내용'
           value={form.content}
           onChange={changeHandler}
@@ -96,6 +97,7 @@ export default function ExamplesAddPage() {
       <div className='w-full'>
         <TextFieldComponent
           id='answer'
+          name='answer'
           label='정답'
           value={form.answer}
           onChange={changeHandler}
@@ -105,6 +107,7 @@ export default function ExamplesAddPage() {
       <div className='w-full'>
         <TextFieldComponent
           id='example'
+          name='example'
           label='예시'
           value={form.example}
           onChange={changeHandler}
@@ -115,7 +118,20 @@ export default function ExamplesAddPage() {
       </div>
       <div className='w-full'>
         <TextFieldComponent
+          id='exam_question'
+          name='exam_question'
+          label='문제 보기'
+          value={form.exam_question}
+          onChange={changeHandler}
+          fullWidth
+          multiline
+          rows={4}
+        />
+      </div>
+      <div className='w-full'>
+        <TextFieldComponent
           id='hint'
+          name='hint'
           label='힌트'
           value={form.hint}
           onChange={changeHandler}
@@ -127,6 +143,7 @@ export default function ExamplesAddPage() {
       <div className='w-full mb-5'>
         <SelectComponent
           id='level'
+          name='level'
           label='난이도'
           value={form.level}
           onChange={changeHandler}
@@ -136,8 +153,9 @@ export default function ExamplesAddPage() {
       </div>
       <div className='w-full'>
         <SelectComponent
-          id='level'
-          label='난이도'
+          id='point'
+          name='point'
+          label='포인트'
           value={form.point}
           onChange={changeHandler}
           option={pointOptions}
@@ -146,9 +164,10 @@ export default function ExamplesAddPage() {
       </div>
       <div className='w-full'>
         <SelectComponent
-          id='examType'
+          id='exam_type'
+          name='exam_type'
           label='문제 유형'
-          value={form.examType}
+          value={form.exam_type}
           onChange={changeHandler}
           option={examTypeOptions}
           fullWidth
